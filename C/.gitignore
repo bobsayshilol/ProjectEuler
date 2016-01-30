@@ -1,0 +1,5 @@
+# Compiled object files. Yes, I know
+*.o
+
+# The final binary
+solutions
