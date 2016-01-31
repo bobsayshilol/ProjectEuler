@@ -36,9 +36,11 @@ SOLUTION_BEGIN(4, uint64_t)
 			// Cache A
 			uint64_t A = 900 + 10 * A1 + A0;
 			
-			for (int64_t B1=9; B1>=0; B1--)
+			// We can start at A rather than 999 since otherwise we'd be doing the same calculation twice
+			// ie 999 * 998 = 998 * 999
+			for (int64_t B1=A1; B1>=0; B1--)
 			{
-				for (int64_t B0=9; B0>=0; B0--)
+				for (int64_t B0=A0; B0>=0; B0--)
 				{
 					// Get B
 					uint64_t B = 900 + 10 * B1 + B0;
