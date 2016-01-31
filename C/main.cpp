@@ -46,15 +46,47 @@ void CheckSolution(T (&solution_function)())
 
 
 // main entry point
-int main()
+int main(int argc, char ** argv)
 {
-	// Macro magic to test each result
+	// Only run specific solutions if requested
+	if (argc != 1)
+	{
+		for (int i=1; i<argc; i++)
+		{
+			// If argv[i] isn't a valid number it'll return 0, which is nice because we start at 1
+			int problem = std::atoi(argv[i]);
+			
+			// Should probably do more than contiune - might be something like --help
+			if (problem == 0)
+				continue;
+			
+			switch (problem)
+			{
+#define CASE(problem_number, return_type, expected_result) \
+				case problem_number: \
+					CheckSolution<problem_number, return_type, expected_result>(solution_ ## problem_number); \
+					break;
+					
+				SOLUTION_LIST(CASE)
+					
+#undef CASE
+				default:
+					printf("Haven't done problem %i yet\n", problem);
+					break;
+			}
+		}
+		
+		// Early exit
+		return 0;
+	}
+	
+	// Simply pass this on to the template above
 #define CHECK_RESULT(problem_number, return_type, expected_result) \
-{ \
-	/* Pass this on to the template above */ \
-	CheckSolution<problem_number, return_type, expected_result>(solution_ ## problem_number); \
-};
+	CheckSolution<problem_number, return_type, expected_result>(solution_ ## problem_number);
+	
 	SOLUTION_LIST(CHECK_RESULT)
+	
+#undef CHECK_RESULT
     
     return 0;
 }
