@@ -35,12 +35,12 @@ void CheckSolution(T (&solution_function)())
 	// TODO: might need to give a bit of leeway here for floats
 	if (calculated != expected)
 	{
-		// For now just print these as doubles
-		printf("Solution %" PRIu64 " failed: %g != %g\n", problem_number, static_cast<double>(calculated), static_cast<double>(expected));
+		// Lazily let std::to_string() handle it
+		printf("Solution %" PRIu64 " failed: %s != %s\n", problem_number, std::to_string(calculated).c_str(), std::to_string(expected).c_str());
 	}
 	else
 	{
-		printf("Solution %" PRIu64 " succeeded: %g\n", problem_number, static_cast<double>(calculated));
+		printf("Solution %" PRIu64 " succeeded: %s\n", problem_number, std::to_string(calculated).c_str());
 	}
 }
 

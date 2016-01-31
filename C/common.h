@@ -5,10 +5,11 @@
 #define EULER_COMMON_H
 
 // Common includes
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <inttypes.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#include <cinttypes>
+#include <string>
 
 
 
@@ -19,7 +20,8 @@
  * The results are taken from projecteuler-solutions
  */
 #define SOLUTION_LIST(custom_macro) \
-	custom_macro(1, uint64_t, 233168)
+	custom_macro(1, uint64_t, 233168) \
+	custom_macro(2, uint64_t, 4613732)
 
 
 
