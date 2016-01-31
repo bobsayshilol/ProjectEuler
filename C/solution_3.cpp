@@ -26,18 +26,19 @@ SOLUTION_BEGIN(3, uint64_t)
 	const uint64_t sqrtN = sqrt(N);
 	
 	// Make a sieve up to sqrtN, ignoring 0
-	std::vector<bool> sieve(sqrtN+1, true);
+	// Use a uint8_t rather than a bool since the bool specialisation is slooooow
+	std::vector<uint8_t> sieve(sqrtN+1, 1);
 	
 	// Create the sieve
 	for (uint64_t prime=2; prime<=sqrtN; prime++)
 	{
 		// If this value hasn't been set then it must be prime
-		if (sieve[prime])
+		if (sieve[prime] == 1)
 		{
 			// Go through all multiples of prime and set them to false in the sieve
 			for (uint64_t multiple=2*prime; multiple<=sqrtN; multiple+=prime)
 			{
-				sieve[multiple] = false;
+				sieve[multiple] = 0;
 			}
 			
 			// Since prime can only be increasing, we can get the result here
