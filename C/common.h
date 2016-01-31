@@ -24,7 +24,8 @@
 	custom_macro(1, uint64_t, 233168) \
 	custom_macro(2, uint64_t, 4613732) \
 	custom_macro(3, uint64_t, 6857) \
-	custom_macro(4, uint64_t, 906609)
+	custom_macro(4, uint64_t, 906609) \
+	custom_macro(5, uint64_t, 232792560)
 
 
 
