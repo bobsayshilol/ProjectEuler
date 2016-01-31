@@ -12,8 +12,9 @@
  *   M = 100000 * M5 + 10000 * M4 + 1000 * M3 + 100 * M2 + 10 * M1 + 1 * M0
  * Since M is a palindrome, M5 = M0, M4 = M1, M3 = M2
  * 
- * Assuming A2 = B2 = 9
- * => M5 >= 8
+ * Assuming M5 = 9
+ *   => M0 = 9
+ * Therefore both A and B must be odd numbers
  * 
  * Brute force time?
  */
@@ -31,7 +32,8 @@ SOLUTION_BEGIN(4, uint64_t)
 	// Brute force through all 9XX numbers
 	for (int64_t A1=9; A1>=0; A1--)
 	{
-		for (int64_t A0=9; A0>=0; A0--)
+		// Since A is odd we can take away 2 at a time
+		for (int64_t A0=9; A0>=0; A0-=2)
 		{
 			// Cache A
 			uint64_t A = 900 + 10 * A1 + A0;
@@ -40,7 +42,8 @@ SOLUTION_BEGIN(4, uint64_t)
 			// ie 999 * 998 = 998 * 999
 			for (int64_t B1=A1; B1>=0; B1--)
 			{
-				for (int64_t B0=A0; B0>=0; B0--)
+				// Since B is odd we can take away 2 at a time
+				for (int64_t B0=A0; B0>=0; B0-=2)
 				{
 					// Get B
 					uint64_t B = 900 + 10 * B1 + B0;
