@@ -27,6 +27,7 @@
 	custom_macro(4, uint64_t, 906609) \
 	custom_macro(5, uint64_t, 232792560) \
 	custom_macro(6, uint64_t, 25164150) \
+	custom_macro(7, uint64_t, 104743) \
 
 
 
