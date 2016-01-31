@@ -10,6 +10,7 @@
 #include <cmath>
 #include <cinttypes>
 #include <string>
+#include <vector>
 
 
 
@@ -21,7 +22,8 @@
  */
 #define SOLUTION_LIST(custom_macro) \
 	custom_macro(1, uint64_t, 233168) \
-	custom_macro(2, uint64_t, 4613732)
+	custom_macro(2, uint64_t, 4613732) \
+	custom_macro(3, uint64_t, 6857)
 
 
 
