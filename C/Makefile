@@ -1,7 +1,7 @@
 CC=g++
 LD=g++
-CFLAGS=-Wall -Wextra -pedantic -std=c++11
-LDFLAGS=
+CFLAGS=-Wall -Wextra -pedantic -std=c++11 -g
+LDFLAGS=-g
 SOURCES=main.cpp solution_1.cpp solution_2.cpp solution_3.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=solutions

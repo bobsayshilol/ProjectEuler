@@ -32,6 +32,7 @@
 return_type solution_ ## problem_number (void)
 
 
+
 /**
  * Macros for wrapping each solution
  * SOLUTION_ENTRY defines the variable "result" which should then be set

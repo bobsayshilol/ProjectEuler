@@ -6,19 +6,7 @@
 /**
  * Timers for timing each solution
  */
-#include <time.h>
-
-// Start a timer
-#define TIMER_START() \
-do { \
-    \
-} while(0)
-
-// Stop a timer
-#define TIMER_STOP() \
-do { \
-    \
-} while(0)
+#include <chrono>
 
 
 
@@ -28,19 +16,30 @@ do { \
 template <uint64_t problem_number, class T, T expected>
 void CheckSolution(T (&solution_function)())
 {
+	// Star the timer
+	auto startTime = std::chrono::high_resolution_clock::now();
+	
 	// Get the value
-	// TODO: time it!
 	const T calculated = solution_function();
+	
+	// Stop the timer
+	auto stopTime = std::chrono::high_resolution_clock::now();
+	
+	// Get the difference
+	 std::chrono::duration<double, std::milli> ms = stopTime - startTime;
+	
+	// Log the start of the message
+	printf("Solution %" PRIu64 " took %fms and ", problem_number, ms.count());
 	
 	// TODO: might need to give a bit of leeway here for floats
 	if (calculated != expected)
 	{
 		// Lazily let std::to_string() handle it
-		printf("Solution %" PRIu64 " failed: %s != %s\n", problem_number, std::to_string(calculated).c_str(), std::to_string(expected).c_str());
+		printf("failed: %s != %s\n", std::to_string(calculated).c_str(), std::to_string(expected).c_str());
 	}
 	else
 	{
-		printf("Solution %" PRIu64 " succeeded: %s\n", problem_number, std::to_string(calculated).c_str());
+		printf("succeeded: %s\n", std::to_string(calculated).c_str());
 	}
 }
 
