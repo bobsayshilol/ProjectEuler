@@ -5,7 +5,7 @@ LDFLAGS=-g
 SOURCES=main.cpp
 SOURCES+=solution_1.cpp  solution_2.cpp  solution_3.cpp  solution_4.cpp  solution_5.cpp
 SOURCES+=solution_6.cpp  solution_7.cpp  solution_8.cpp  solution_9.cpp  solution_10.cpp
-SOURCES+=solution_11.cpp solution_12.cpp solution_13.cpp solution_14.cpp
+SOURCES+=solution_11.cpp solution_12.cpp solution_13.cpp solution_14.cpp solution_15.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=solutions
 
