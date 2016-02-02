@@ -9,9 +9,11 @@
 #include <cstdlib>
 #include <cmath>
 #include <cinttypes>
+#include <cstring>
 #include <string>
 #include <vector>
 #include <map>
+#include <algorithm>
 
 
 
@@ -39,6 +41,7 @@
 	custom_macro(15, uint64_t, 137846528820) \
 	custom_macro(16, uint64_t, 1366) \
 	custom_macro(17, uint64_t, 21124) \
+	custom_macro(18, uint64_t, 1074) \
 
 
 
