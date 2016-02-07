@@ -76,15 +76,18 @@ SOLUTION_BEGIN(12, uint64_t)
 		primes.clear();
 		primes.reserve(chunks * chunkSize / 2);	// only allocate the storage
 		
-		// Start at 2
-		uint64_t prime = 2;
+		// Special case 2
+		primes.push_back(2);
+		
+		// Start at 3
+		uint64_t prime = 3;
 		while (prime < chunks * chunkSize)
 		{
 			// If this value hasn't been set then it must be prime
 			if (sieve[prime] == 1)
 			{
 				// Go through all multiples of prime and set them to false in the sieve
-				for (uint64_t multiple=2*prime; multiple<chunks*chunkSize; multiple+=prime)
+				for (uint64_t multiple=prime*prime; multiple<chunks*chunkSize; multiple+=2*prime)
 				{
 					sieve[multiple] = 0;
 				}
@@ -93,8 +96,8 @@ SOLUTION_BEGIN(12, uint64_t)
 				primes.push_back(prime);
 			}
 			
-			// Move to the next number
-			prime++;
+			// Move to the next odd number
+			prime += 2;
 		}
 	};
 	

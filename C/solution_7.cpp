@@ -47,15 +47,22 @@ SOLUTION_BEGIN(7, uint64_t)
 		// Resize the sieve
 		sieve.resize(chunks * chunkSize, 1);
 		
-		// Start at 2
-		uint64_t prime = 2;
+		// Special case 2
+		if (++primeCount == primeIndex)
+		{
+			result = 2;
+			found = true;
+		}
+		
+		// Start at 3
+		uint64_t prime = 3;
 		while ((prime < chunks * chunkSize) && !found)
 		{
 			// If this value hasn't been set then it must be prime
 			if (sieve[prime] == 1)
 			{
 				// Go through all multiples of prime and set them to false in the sieve
-				for (uint64_t multiple=2*prime; multiple<chunks*chunkSize; multiple+=prime)
+				for (uint64_t multiple=prime*prime; multiple<chunks*chunkSize; multiple+=2*prime)
 				{
 					sieve[multiple] = 0;
 				}
@@ -68,8 +75,8 @@ SOLUTION_BEGIN(7, uint64_t)
 				}
 			}
 			
-			// Move to the next number
-			prime++;
+			// Move to the next odd number
+			prime += 2;
 		}
 		
 		// Increase the number of chunks

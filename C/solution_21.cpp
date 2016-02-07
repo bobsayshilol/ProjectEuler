@@ -59,14 +59,17 @@ SOLUTION_BEGIN(21, uint64_t)
 	std::vector<uint64_t> primes;
 	primes.reserve(maxPrime);
 	
+	// Special case 2
+	primes.push_back(2);
+	
 	// Create the sieve
-	for (uint64_t prime=2; prime<=maxPrime; prime++)
+	for (uint64_t prime=3; prime<=maxPrime; prime+=2)
 	{
 		// If this value hasn't been set then it must be prime
 		if (sieve[prime] == 1)
 		{
 			// Go through all multiples of prime and set them to false in the sieve
-			for (uint64_t multiple=2*prime; multiple<=maxPrime; multiple+=prime)
+			for (uint64_t multiple=prime*prime; multiple<=maxPrime; multiple+=2*prime)
 			{
 				sieve[multiple] = 0;
 			}
@@ -119,10 +122,10 @@ SOLUTION_BEGIN(21, uint64_t)
 	result = 0;
 	
 	// Go through each value looking for pairs
-	for (uint64_t a=2; a < max; a++)
+	for (uint64_t a=4; a < max; a++)
 	{
-		// If this is prime then skip it
-		if (sieve[a] == 1)
+		// If this is prime then skip it, but not if it's even due to the optimisation above
+		if (((a % 2) != 0) && (sieve[a] == 1))
 			continue;
 		
 		// Otherwise calculate the proper divisor sum
