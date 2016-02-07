@@ -1,7 +1,7 @@
 CC=g++
 LD=g++
-CFLAGS=-Wall -Wextra -pedantic -std=c++11 -g
-LDFLAGS=-g
+CFLAGS=-Wall -Wextra -pedantic -std=c++11 -g -O3 -flto
+LDFLAGS=-g -O3 -flto
 SOURCES=main.cpp
 SOURCES+=solution_1.cpp  solution_2.cpp  solution_3.cpp  solution_4.cpp  solution_5.cpp
 SOURCES+=solution_6.cpp  solution_7.cpp  solution_8.cpp  solution_9.cpp  solution_10.cpp
