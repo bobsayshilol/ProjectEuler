@@ -13,8 +13,8 @@
 /**
  * Simple checker template
  */
-template <uint64_t problem_number, class T, T expected>
-void CheckSolution(T (&solution_function)())
+template <class T>
+void CheckSolution(uint64_t problem_number, T (&solution_function)(), T expected)
 {
 	// Star the timer
 	auto startTime = std::chrono::high_resolution_clock::now();
@@ -64,7 +64,7 @@ int main(int argc, char ** argv)
 			{
 #define CASE(problem_number, return_type, expected_result) \
 				case problem_number: \
-					CheckSolution<problem_number, return_type, expected_result>(solution_ ## problem_number); \
+					CheckSolution<return_type>(problem_number, solution_ ## problem_number, expected_result); \
 					break;
 					
 				SOLUTION_LIST(CASE)
@@ -82,7 +82,7 @@ int main(int argc, char ** argv)
 	
 	// Simply pass this on to the template above
 #define CHECK_RESULT(problem_number, return_type, expected_result) \
-	CheckSolution<problem_number, return_type, expected_result>(solution_ ## problem_number);
+	CheckSolution<return_type>(problem_number, solution_ ## problem_number, expected_result);
 	
 	SOLUTION_LIST(CHECK_RESULT)
 	
