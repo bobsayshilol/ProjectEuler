@@ -29,6 +29,13 @@ struct NameValuePair {
 
 
 
+// TODO: just use a loop...
+static const char* name_list[] = {
+	#include "p022_names.txt"
+};
+
+
+
 // Begin the solution
 SOLUTION_BEGIN(22, uint64_t)
 {
