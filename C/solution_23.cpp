@@ -24,9 +24,7 @@
  * Let y = a + b, where a and b are abundant numbers
  * Then the solution is sum(i) - sum(y)
  * 
- * 
- * 
- * Brute force it
+ * We can create a list of abundant numbers and then add them in pairs to generate all y's and use the sum above to get the result
  */
 
 
@@ -115,10 +113,7 @@ SOLUTION_BEGIN(23, uint64_t)
 		}
 	}
 	
-	// Initialise the result
-	result = 0;
-	
-	// Create a list of abundant numbers as we go
+	// Create a list of abundant numbers
 	std::vector<uint64_t> abundants;
 	abundants.reserve(max);
 	for (uint64_t n=1; n<max; n++)
@@ -128,41 +123,31 @@ SOLUTION_BEGIN(23, uint64_t)
 		{
 			abundants.push_back(n);
 		}
-		
-		// Then brute force check if we can be decomposed into 2 abundants
-		bool decomposed = false;
-		const size_t abundantCount = abundants.size();
-		for (size_t i=0; i<abundantCount && !decomposed; i++)
+	}
+	
+	// Initialise the result to the sum of i up to max
+	result = (max*(max-1))/2;	// sum(i)
+	
+	// Go through all pairs of abundants and sum them to cross off which ones can be decomposed
+	std::vector<uint8_t> decomposed(max, 0);
+	const size_t abundantCount = abundants.size();
+	for (size_t i=0; i<abundantCount; i++)
+	{
+		const uint64_t abundant1 = abundants[i];
+		for (size_t j=0; j<=i; j++)
 		{
-			bool triedOnce = false;
-			const uint64_t abundant1 = abundants[i];
+			const uint64_t sum = abundant1 + abundants[j];
 			
-			// We start from the reverse since as n increases we expect it to be more likely to be abundant
-			for (ssize_t j=abundantCount-1; j>=0 && !decomposed; j--)
-			{
-				const uint64_t abundant2 = abundants[j];
-				
-				// Check if it decomposed
-				if (abundant1 + abundant2 == n)
-					decomposed = true;
-				
-				// No point checking any more if this is too small
-				if (abundant1 + abundant2 <= n)
-					break;
-				
-				triedOnce = true;
-			}
-			
-			// If we failed the first attempt then there's no point in carrying on since we know this number
-			// can't be decomposed into two that don't sum to make it
-			if (!triedOnce)
+			// If the sum is greater than max we don't need to care about it
+			if (sum >= max)
 				break;
-		}
-		
-		// Add it to the sum
-		if (!decomposed)
-		{
-			result += n;
+			
+			// See if we've decomposed this sum before
+			if (decomposed[sum] == 0)
+			{
+				decomposed[sum] = 1;
+				result -= sum;
+			}
 		}
 	}
 }
